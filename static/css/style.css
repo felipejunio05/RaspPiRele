@@ -1,0 +1,49 @@
+html,body {
+  height: 90%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-bottom: 70px;
+  background-color: #45495B;
+}
+
+h1 {
+    color: #00F500;
+}
+
+.f-login {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.f-login .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.f-login .form-control:focus {
+  z-index: 2;
+}
+
+.f-login input[type="Login"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.f-login input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+p.error {
+    color: #FF0000;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title>DC EXPERT - Raspberry Relé</title>
+        <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- CSS Bootstrap -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+		<!-- CSS Fontawesome -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+		<!-- CSS Custom -->
+        <link href= "{{ url_for('static', filename='css/home.css') }}" rel="stylesheet">
+
+		<!-- Script Jquery -->
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	</head>
+
+    <body>
+        <header class="mb-3">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark"> <!-- Inicio Cabeçalho -->
+				<a class="navbar-brand p-0 ms-4" href="home">
+					<img class="d-block" src="{{ url_for('static', filename='img/logo-dcexpert.svg') }}" alt="" width="300px" height="60px">
+				</a>
+				<ul class="navbar-nav flex-row d-flex ms-auto" style="margin-right: 7px !important;">
+					<li class="nav-item">
+						<div class="btn-group">
+							<a class="btn btn-dark text-light disabled">Administrador</a>
+							<button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+								<span class="visually-hidden">Toggle Dropdown</span>
+							</button>
+
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="#">Alterar Senha</a></li>
+								<li><a class="dropdown-item" href="#">Novo Usuário</a></li>
+								<li><a class="dropdown-item" href="#">Auditoria</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item" href="#">Sair</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+            </nav><!-- Fim Cabeçalho -->
+        </header>
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<h3>CANAIS & DISPOSITIVOS</h3>
+					</div>
+				</div>
+				<hr class="mb-2">
+            </div>
+        </section>
+    </body>
+</html>

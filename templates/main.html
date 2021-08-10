@@ -1,0 +1,103 @@
+<header class="mb-3">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark"> <!-- Inicio Cabeçalho -->
+        <a class="navbar-brand p-0 ms-4 nv-logo" href="home" style="width: 210px;">
+            <img class="d-block" src="{{ url_for('static', filename='img/logo-dcexpert.svg') }}" alt="" width="210px" height="60px">
+        </a>
+
+        <ul class="navbar-nav flex-row d-flex ms-auto nv-button"  style="margin-right: 25px !important;display: inline !important;width: 136px;">
+            <li class="nav-item">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split nv-display" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ session.user }}<span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+
+                    <ul class="dropdown-menu nv-options">
+                        <li><a id="changePswd" class="dropdown-item">Alterar Senha</a></li>
+
+                        {% if group is defined and group == 1 %}
+                            <li><a id="controlUser" class="dropdown-item">Conf. Usuários</a></li>
+                            <li><a class="dropdown-item">Auditoria</a></li>
+                        {% elif session.group == 1 %}
+                            <li><a id="controlUser" class="dropdown-item">Conf. Usuários</a></li>
+                            <li><a class="dropdown-item">Auditoria</a></li>
+                        {% endif %}
+
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="logout">Sair</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav><!-- Fim Cabeçalho -->
+</header>
+
+<section>
+    <div class="container">
+        {% if alert is defined and alert != '' %}
+            {{ alert | safe }}
+        {% endif %}
+
+        <div id="main" class="row">
+            <div class="col">
+                <h3>CANAIS & DISPOSITIVOS</h3>
+            </div>
+        </div>
+        <hr class="mb-2">
+        <div class="row mb-2">
+            <div class="col">
+                <div class="btn-group">
+                    <button id="powerOptions" class="btn btn-danger dropdown-toggle dropdown-toggle-split btn-slim" data-bs-toggle="dropdown" aria-expanded="false">Power <span class="visually-hidden">Toggle Dropdown</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a id="powerOn" class="dropdown-item">On</a></li>
+                        <li><a id="powerOff" class="dropdown-item">Off</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group ms-2">
+                    {% if group is defined and group == 1 %}
+                        <button class="btn btn-primary dropdown-toggle dropdown-toggle-split btn-slim" data-bs-toggle="dropdown" aria-expanded="false">Outros <span class="visually-hidden">Toggle Dropdown</span></button>
+                    {% elif session.group == 1 %}
+                        <button class="btn btn-primary dropdown-toggle dropdown-toggle-split btn-slim" data-bs-toggle="dropdown" aria-expanded="false">Outros <span class="visually-hidden">Toggle Dropdown</span></button>
+                    {% else %}
+                        <button class="btn btn-primary dropdown-toggle dropdown-toggle-split btn-slim disabled" data-bs-toggle="dropdown" aria-expanded="false">Outros <span class="visually-hidden">Toggle Dropdown</span></button>
+                    {% endif %}
+
+                    <ul class="dropdown-menu">
+                        <li><a id="add" class="dropdown-item">Adicionar</a></li>
+                        <li><a id="edit" class="dropdown-item">Editar</a></li>
+                        <li><a id="rem" class="dropdown-item">Remover</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <table cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="chk">#</th>
+                            <th class="channel">Ch</th>
+                            <th class="status">Status</th>
+                            <th>Hostname</th>
+                            <th>Endereço IP</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for reg in table %}
+                            <tr id="{{ 'DEVTB_' + reg[0]|string }}">
+                                <td><input class="form-check-input" type="checkbox" value="" id="{{ 'DEVCK_' + reg[0]|string }}"></td>
+                                <td>{{ reg[4] }}</td>
+                                <td><i class="statusDevice fas fa-circle fa-sm text-success"></i></td>
+                                <td>{{ reg[1] }}</td>
+                                <td>{{ reg[2] }}</td>
+                                <td class="d-none">{{ reg[3] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Script Bootstrap-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>

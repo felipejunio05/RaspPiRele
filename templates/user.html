@@ -1,0 +1,86 @@
+<header class="mb-3">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark"> <!-- Inicio Cabeçalho -->
+        <a class="navbar-brand p-0 ms-4 nv-logo" href="home" style="width: 210px;">
+            <img class="d-block" src="{{ url_for('static', filename='img/logo-dcexpert.svg') }}" alt="" width="210px" height="60px">
+        </a>
+
+        <ul class="navbar-nav flex-row d-flex ms-auto nv-button"  style="margin-right: 25px !important;display: inline !important;width: 136px;">
+            <li class="nav-item">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split nv-display" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ session.user }}<span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+
+                    <ul class="dropdown-menu nv-options">
+                        <li><a id="changePswd" class="dropdown-item">Alterar Senha</a></li>
+
+                        {% if group is defined and group == 1 %}
+                            <li><a id="controlUser" class="dropdown-item">Conf. Usuários</a></li>
+                            <li><a class="dropdown-item">Auditoria</a></li>
+                        {% elif session.group == 1 %}
+                            <li><a id="controlUser" class="dropdown-item">Conf. Usuários</a></li>
+                            <li><a class="dropdown-item">Auditoria</a></li>
+                        {% endif %}
+
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="logout">Sair</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav><!-- Fim Cabeçalho -->
+</header>
+
+<section>
+    <div class="container">
+        {% if alert is defined and alert != '' %}
+            {{ alert | safe }}
+        {% endif %}
+
+        <div id="list-user" class="row">
+            <div class="col">
+                <h3>CONTROLE DE USUÁRIOS</h3>
+            </div>
+        </div>
+        <hr class="mb-2">
+        <div class="row mb-2">
+            <div class="col">
+                <button id="newUser" class="btn btn-success btn-slim">Adicionar</button>
+                <button id="editUser" class="btn btn-primary btn-slim ms-2">Editar</button>
+                <button id="ExclnUser" class="btn btn-danger btn-slim ms-2">Remover</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <table cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="chk">#</th>
+                            <th class="el-none">ID</th>
+                            <th class="status el-none">Nome</th>
+                            <th>Login</th>
+                            <th>Grupo</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reg in table %}
+                            <tr id="{{ 'USRTB_' + reg[0]|string }}">
+                                <td><input class="form-check-input" type="checkbox" value="" id="{{ 'USRCK_' + reg[0]|string }}"></td>
+                                <td class="el-none">{{ '%06d' | format(reg[0]) }}</td>
+                                <td class="el-none" style="width: 300px;">{{ reg[1] }}</td>
+                                <td>{{ reg[2] }}</td>
+                                <td>{{ reg[3] }}</td>
+                                <td>{{ reg[4] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <a href="home" class="btn btn-primary mt-2 btn-slim">Voltar</a>
+    </div>
+</section>
+<!-- Script Bootstrap-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>

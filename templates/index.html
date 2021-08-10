@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+    <head>
+        <title>DC EXPERT - Raspberry Relé</title>
+        <meta charset="UTF-8">
+
+        <!-- Favicon Raspberry-->
+        <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+        <!-- CSS Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<!-- CSS Fontawesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <!-- CSS Custom -->
+        <link href= "{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+        <!-- Scripts Jquery -->
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	</head>
+
+    <body class="text-center">
+        <main class="f-login"><!--Incio do Conteudo -->
+            <form action="/controller" method="POST"><!--Inicio Formulário -->
+                <img class="mb-2" src="{{ url_for('static', filename='img/logo-rasp.png') }}" alt="" width="72" height="57">
+                <h1 class="h3 mb-3 fw-normal">RASPBERRY PI RELÉ</h1>
+
+                <label for="login" class="visually-hidden">Endereço de E-mail</label><!-- Rótulo usuário -->
+                <input name="login" type="login" id="login" class="form-control" placeholder="Usuário" required autofocus><!-- Campo Login -->
+
+                <label for="password" class="visually-hidden">Senha</label><!-- Rótulo senha -->
+                <input name="password" type="password" id="password" class="form-control" placeholder="Senha"><!-- Campo Senha -->
+
+                <input id="operation" name="operation" type="password" value="login" hidden>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button><!-- Botão de Log In -->
+            </form><!-- Fim Formulário -->
+
+            {% if request.args.login == '0' and not session.auth %}
+                <div class="mt-2">
+                    <p class="h6 error fw-normal">Login Inválido! </p>
+                </div>
+            {% elif request.args.login == '1' and not session.auth %}
+                <div class="mt-2">
+                    <p class="h6 error fw-normal">Acesso não autorizado! </p>
+                </div>
+            {% endif %}
+        </main><!--Fim do Conteúdo -->
+
+		<!-- Script Bootstrap-->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    </body>
+</html>

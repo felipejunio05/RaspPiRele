@@ -1,0 +1,167 @@
+hr {
+    border: None !important;
+    background: #000 !important;
+    height: 1px !important;
+    margin-top: 0px;
+}
+
+h3 {
+    font-family: "Times New Roman", Times, serif;
+}
+table {
+    width: 100%;
+}
+
+table {
+        overflow: hidden;
+        border-collapse: separate;
+        border: 1px solid #ccc;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+}
+
+th {
+    background: #CCC;
+    padding: 0px;
+}
+
+th:hover {
+    background: #867F7E;
+}
+
+td, th {
+    text-align: center;
+}
+
+th.chk {
+    width: 40px;
+}
+
+th.channel {
+    width: 60px;
+}
+
+th.status {
+    width: 75px;
+}
+
+.btn-ml {
+    margin-left: 10%;
+}
+
+.btn-slim {
+    height: 30px;
+    text-align: center;
+    line-height: 0px !important;
+}
+
+a.btn-slim {
+    height: 30px;
+    text-align: center;
+    line-height: 13px !important;
+}
+
+.bt-chcad {
+    width: 93.03px;
+}
+.content {
+    width: 70%
+}
+
+.ml-form {
+    margin-right: 0.8em;
+}
+
+input[type="checkbox"] {
+    display: block !important;
+    margin-left: 30%;
+    margin-right: auto;
+}
+
+input {
+    display: inline !important;
+}
+
+select {
+    display: inline !important;
+}
+
+@media (max-width: 576px) {
+    input[type="checkbox"] {
+        margin-left: auto;
+    }
+
+    .nv-logo {
+        width: 160px !important;
+    }
+
+    .nv-button {
+        width: 135px !important;
+    }
+    .nv-display {
+        width: 135px !important;
+        height: 39px !important;
+    }
+
+    .nv-options {
+        position: absolute !important;
+    }
+
+    .el-none {
+        display: none !important;
+    }
+
+    .me-xs-custom {
+       margin-right: 2.5rem!important;
+    }
+
+    .me-xs-port {
+        margin-right: 3.2rem!important;
+    }
+    .me-xs-cspwd {
+       margin-right: 1.4rem!important;
+    }
+
+    .me-xs-cha {
+       margin-right: 2.9rem!important;
+    }
+
+    .mb-sm-custom {
+        margin-bottom: 1rem!important;
+    }
+
+    input#lastname {
+        margin-left: 2px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .nv-display {
+        width: 134.59px;
+    }
+
+   .el-none {
+        display: none !important;
+   }
+
+   .mb-sm-custom {
+        margin-bottom: 1rem!important;
+   }
+
+    .me-xs-cspwd {
+       margin-right: 1.4rem!important;
+    }
+
+    .me-xs-cha {
+       margin-right: 2.9rem!important;
+    }
+
+    .me-xs-port {
+        margin-right: 3.2rem!important;
+    }
+
+    input#lastname {
+        margin-left: 2px;
+    }
+}

@@ -1,0 +1,174 @@
+<header class="mb-3">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark"> <!-- Inicio Cabeçalho -->
+        <a class="navbar-brand p-0 ms-4 nv-logo" href="home" style="width: 210px;">
+            <img class="d-block" src="{{ url_for('static', filename='img/logo-dcexpert.svg') }}" alt="" width="210px" height="60px">
+        </a>
+
+        <ul class="navbar-nav flex-row d-flex ms-auto nv-button"  style="margin-right: 25px !important;display: inline !important;width: 136px;">
+            <li class="nav-item">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split nv-display" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ session.user }}<span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+
+                    <ul class="dropdown-menu nv-options">
+                        <li><a id="changePswd" class="dropdown-item">Alterar Senha</a></li>
+
+                        {% if group is defined and group == 1 %}
+                            <li><a id="controlUser" class="dropdown-item">Conf. Usuários</a></li>
+                            <li><a class="dropdown-item">Auditoria</a></li>
+                        {% elif session.group == 1 %}
+                            <li><a id="controlUser" class="dropdown-item">Conf. Usuários</a></li>
+                            <li><a class="dropdown-item">Auditoria</a></li>
+                        {% endif %}
+
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="logout">Sair</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav><!-- Fim Cabeçalho -->
+</header>
+
+<section>
+	<div class="container">
+		{% if alert is defined and alert != '' %}
+			{{ alert | safe }}
+		{% endif %}
+
+		<div id="reg-user" class="row">
+			<div class="col">
+				{% if request.form['pag'] == '0' %}
+					<h3>ADICIONAR USUÁRIO</h3>
+				{% elif request.form['pag'] == '1' %}
+					<h3>EDITAR USUÁRIO</h3>
+				{% elif request.form['pag'] == '2' %}
+					<h3>ALTERAR A SENHA</h3>
+				{% endif %}
+			</div>
+		</div>
+
+		<hr class="mb-4">
+
+		<form>
+			{% if request.form['pag'] == '0' %}
+				<div class="row mb-3">
+					<div class="col-md-4 mb-sm-custom">
+						<label for="name" class="form-label me-md-1 me-sm-5 me-xs-custom">Nome: </label>
+						<input id="name" type="text" class="form-control"  style="width: 180px;">
+					</div>
+					<div class="col-md-4">
+						<label for="lastname" class="form-label me-sm-2">Sobrenome: </label>
+						<input id="lastname" type="text" class="form-control"  style="width: 180px;">
+					</div>
+				</div>
+
+				<div class="row mb-3">
+					<div class="col-md-4 mb-sm-custom">
+						<label for="login" class="form-label me-md-1 me-sm-5 me-xs-custom">Login: </label>
+						<input id="login" type="text" class="form-control ms-1" style="width: 180px;">
+					</div>
+			{% elif request.form['pag'] == '1' %}
+				<div class="row mb-3">
+					<input id="idusr" type="hidden" value="{{request.form['id']}}">
+					<div class="col-md-4 mb-sm-custom">
+						<label for="name" class="form-label me-md-1 me-sm-5 me-xs-custom">Nome: </label>
+						<input id="name" type="text" class="form-control" style="width: 180px;" value="{{request.form['name']}}">
+					</div>
+					<div class="col-md-4">
+						<label for="lastname" class="form-label me-sm-2">Sobrenome: </label>
+						<input id="lastname" type="text" class="form-control" style="width: 180px;" value="{{request.form['lastname']}}">
+					</div>
+				</div>
+
+				<div class="row mb-3">
+					<div class="col-md-4 mb-sm-custom">
+						<label for="login" class="form-label me-md-1 me-sm-5 me-xs-custom">Login: </label>
+						<input id="login" type="text" class="form-control ms-1"  style="width: 180px;" value="{{request.form['login']}}">
+					</div>
+			{% endif %}
+
+			{% if request.form['pag'] == '0' %}
+				<div class="col-md-4 mb-sm-custom">
+					<label for="passwd" class="form-label me-sm-5 me-xs-custom">Senha:</label>
+					<input id="passwd" type="password" class="form-control" style="width: 180px;">
+				</div>
+			{% endif %}
+
+			{% if request.form['pag'] == '0' or request.form['pag'] == '1' %}
+				<div class="col-md-4 mb-sm-custom">
+					{% if request.form['pag'] == '0' %}
+						<label for="grpUsr" class="form-label me-md-1 me-sm-5 me-xs-custom">Grupo: </label>
+					{% else %}
+						<label for="grpUsr" class="form-label me-sm-5 me-xs-custom">Grupo: </label>
+					{% endif %}
+
+					<select id="grpUsr" class="form-select" style="width: 180px;">
+							{% if request.form['pag'] == '1' and request.form['group']  == "Administradores" %}
+								<option selected value="1">Administradores</option>
+								<option value="2">Usuários</option>
+							{% elif request.form['pag'] == '1' and request.form['group']  == "Usuários" %}
+								<option value="1">Administradores</option>
+								<option selected value="2">Usuários</option>
+							{% elif request.form['pag'] == '0' %}
+								<option value="1">Administradores</option>
+								<option selected value="2">Usuários</option>
+							{% endif %}
+						</select>
+				</div>
+					{% if request.form['pag'] == '0' %}
+						</div>
+					{% endif %}
+			{% endif %}
+
+			{% if request.form['pag'] == '1' %}
+					<div class="col-md-4">
+						<label for="stUsr" class="form-label me-md-1 me-sm-5 me-xs-custom">Status: </label>
+						<select id="stUsr" class="form-select" style="width: 180px;">
+							{% if request.form['status']  == "Habilitado" %}
+								<option selected value="1">Habilitado</option>
+								<option value="2">Desabilitado</option>
+							{% elif request.form['status']  == "Desabilitado" %}
+								<option value="1">Habilitado</option>
+								<option selected value="2">Desabilitado</option>
+							{% endif %}
+						</select>
+					</div>
+				</div>
+			{% endif %}
+
+			{% if request.form['pag'] == '2' %}
+				<div class="mb-3 row">
+					<div class="col-md-3 me-4 mb-sm-custom">
+						<label for="passwd" class="form-label me-1 me-xs-cspwd">Senha:</label>
+						<input id="passwd" type="password" class="form-control" style="width: 180px;">
+					</div>
+					<div class="col-md-4">
+						<label for="passRepeat" class="form-label me-md-2 ms-md-3">Confirma:</label>
+						<input id="passRepeat" type="password" class="form-control" style="width: 180px;">
+					</div>
+				</div>
+			{% endif %}
+
+			<div class="row">
+				<div class="col d-flex justify-content-center">
+					{% if request.form['pag'] == '0' %}
+						<a id="regUsrPg" class="btn btn-success btn-slim">Cadastrar</a>
+						{% elif request.form['pag'] == '1' %}
+						<a id="editUsrPg" class="btn btn-success bt-chcad btn-slim">Alterar</a>
+					{% endif %}
+
+					{% if request.form['pag']  == '2' %}
+						<a id="chaPswdPg" class="btn btn-success bt-chcad btn-slim">Alterar</a>
+						<a href="home" class="btn btn-primary ms-5 bt-chcad btn-slim">Voltar</a>
+					{% else %}
+						<a id="backUsr" class="btn btn-primary ms-5 bt-chcad btn-slim">Voltar</a>
+					{% endif %}
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+<!-- Script Bootstrap-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
